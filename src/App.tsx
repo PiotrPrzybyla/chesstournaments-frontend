@@ -9,9 +9,14 @@ import OrganizerPage from "./Pages/OrganizerPage";
 import GroupsPage from "./Pages/GroupsPage";
 import GroupPage from "./Pages/GroupPage";
 import RegisterPage from "./Pages/RegisterPage";
+import i18next from "i18next";
+import { I18nextProvider } from "react-i18next";
+import "./configs/i18n";
+interface IAppProps {}
 
-const App = () => {
+const App:React.FC<IAppProps> = () => {
   return (
+    <I18nextProvider i18n={i18next}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<TournamentsPage/>}/>
@@ -26,6 +31,7 @@ const App = () => {
         <Route path="group/:group_id" element={<GroupPage/>}/>
       </Routes>
     </BrowserRouter>
+    </I18nextProvider>
   );
 }
 
