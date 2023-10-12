@@ -3,13 +3,17 @@ import detector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import tournamentsPl from   "../translations/pl/tournaments.json";
 import tournamentsEn from   "../translations/en/tournaments.json";
+import navigationPl from   "../translations/pl/navigation.json";
+import navigationEn from   "../translations/en/navigation.json";
 
 const resources = {
 	en: {
         "tournaments": tournamentsPl,
+		"navigation": navigationPl
 	},
 	pl: {
         "tournaments": tournamentsEn,
+		"navigation": navigationEn
 	},
 };
 

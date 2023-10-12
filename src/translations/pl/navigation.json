@@ -1,0 +1,4 @@
+{
+    "title": "chesstournaments",
+    "pages": [{"name": "Turnieje", "link": "/tournaments"}, {"name": "Stwórz turniej", "link": "/createTournament"}, {"name": "Moje grupy", "link": "/groups"}]
+}
