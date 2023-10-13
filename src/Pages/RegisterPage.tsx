@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
+import UIGenerator from "../components/UIGenerator/UIGenerator";
 
 interface IRegisterPageProps {}
 
-const RegisterPage:React.FC<IRegisterPageProps> = () => {
-  return (
-    <div>RegisterPage</div>
-  )
-}
+const RegisterPage: React.FC<IRegisterPageProps> = () => {
+	return <UIGenerator>RegisterPage</UIGenerator>;
+};
 
-export default RegisterPage
+export default RegisterPage;
