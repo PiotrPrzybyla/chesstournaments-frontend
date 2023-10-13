@@ -1,0 +1,12 @@
+{
+	"title": "chesstournaments",
+	"pages": [
+		{ "name": "Turnieje", "link": "/tournaments" },
+		{ "name": "Stwórz turniej", "link": "/createTournament" },
+		{ "name": "Moje grupy", "link": "/groups" }
+	],
+	"organizer": "Panel Organizatora",
+	"login": "Zaloguj się",
+	"register": "Zarejestruj się",
+	"profile": "Mój profil"
+}
