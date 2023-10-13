@@ -1,4 +1,12 @@
 {
-    "title": "chesstournaments",
-    "pages": [{"name": "Tournaments", "link": "/tournaments"}, {"name": "Create Toruanment", "link": "/createTournament"}, {"name": "My Groups", "link": "/groups"}]
+	"title": "chesstournaments",
+	"pages": [
+		{ "name": "Tournaments", "link": "/tournaments" },
+		{ "name": "Create Touranment", "link": "/createTournament" },
+		{ "name": "My Groups", "link": "/groups" }
+	],
+	"organizer": "Organizer Panel",
+	"login": "Sign in",
+	"register": "Sign up",
+	"profile": "My Profile"
 }

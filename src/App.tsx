@@ -14,25 +14,28 @@ import { I18nextProvider } from "react-i18next";
 import "./configs/i18n";
 interface IAppProps {}
 
-const App:React.FC<IAppProps> = () => {
-  return (
-    <I18nextProvider i18n={i18next}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<TournamentsPage/>}/>
-        <Route path="/torunaments" element={<TournamentsPage/>}/>
-        <Route path="tournament:tournament_id" element={<TournamentPage/>}/>
-        <Route path="createTorunament" element={<CreateTournamentPage/>}/>
-        <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/register" element={<RegisterPage/>}/>
-        <Route path="profile/:user_id" element={<ProfilePage/>}/>
-        <Route path="organizer:organizer_id" element={<OrganizerPage/>}/>
-        <Route path="groups" element={<GroupsPage/>}/>
-        <Route path="group/:group_id" element={<GroupPage/>}/>
-      </Routes>
-    </BrowserRouter>
-    </I18nextProvider>
-  );
-}
+const App: React.FC<IAppProps> = () => {
+	return (
+		<I18nextProvider i18n={i18next}>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<TournamentsPage />} />
+					<Route path="/tournaments" element={<TournamentsPage />} />
+					<Route
+						path="/tournament:tournament_id"
+						element={<TournamentPage />}
+					/>
+					<Route path="/createTournament" element={<CreateTournamentPage />} />
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/register" element={<RegisterPage />} />
+					<Route path="/profile/:user_id" element={<ProfilePage />} />
+					<Route path="/organizer:organizer_id" element={<OrganizerPage />} />
+					<Route path="/groups" element={<GroupsPage />} />
+					<Route path="/group/:group_id" element={<GroupPage />} />
+				</Routes>
+			</BrowserRouter>
+		</I18nextProvider>
+	);
+};
 
 export default App;

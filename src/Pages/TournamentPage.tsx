@@ -1,12 +1,10 @@
-import React from 'react'
+import React from "react";
+import UIGenerator from "../components/UIGenerator/UIGenerator";
 
 interface ITournamentPageProps {}
 
-const TournamentPage:React.FC<ITournamentPageProps> = () => {
+const TournamentPage: React.FC<ITournamentPageProps> = () => {
+	return <UIGenerator>TournamentPage</UIGenerator>;
+};
 
-  return (
-    <div>TournamentPage</div>
-  )
-}
-
-export default TournamentPage
+export default TournamentPage;
