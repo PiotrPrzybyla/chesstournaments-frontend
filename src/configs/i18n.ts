@@ -5,15 +5,19 @@ import tournamentsPl from   "../translations/pl/tournaments.json";
 import tournamentsEn from   "../translations/en/tournaments.json";
 import navigationPl from   "../translations/pl/navigation.json";
 import navigationEn from   "../translations/en/navigation.json";
+import createTournamentEn from   "../translations/en/createTournament.json";
+import createTournamentPl from   "../translations/pl/createTournament.json";
 
 const resources = {
 	en: {
-        "tournaments": tournamentsPl,
-		"navigation": navigationPl
+        "tournaments": tournamentsEn,
+		"navigation": navigationEn,
+		"createTournament": createTournamentEn
 	},
 	pl: {
-        "tournaments": tournamentsEn,
-		"navigation": navigationEn
+        "tournaments": tournamentsPl,
+		"navigation": navigationPl,
+		"createTournament": createTournamentPl
 	},
 };
 
