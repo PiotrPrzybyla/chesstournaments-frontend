@@ -1,4 +1,4 @@
-import { Button, FormControl, Typography } from "@mui/material";
+import { Button, FormControl } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { FormTextField, FormTitle } from "./styles";
