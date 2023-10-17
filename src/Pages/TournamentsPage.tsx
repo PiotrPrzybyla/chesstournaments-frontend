@@ -1,12 +1,15 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import UIGenerator from "../components/UIGenerator/UIGenerator";
+import TournamentsPanel from "../components/TournamentsPanel/TournamentsPanel";
 
 interface ITournamentsPageProps {}
 
 const TournamentsPage: React.FC<ITournamentsPageProps> = () => {
-	const { t } = useTranslation("tournaments");
-	return <UIGenerator>{`${t("title")}`}</UIGenerator>;
+  return (
+    <UIGenerator>
+      <TournamentsPanel></TournamentsPanel>
+    </UIGenerator>
+  );
 };
 
 export default TournamentsPage;
