@@ -7,17 +7,21 @@ import navigationPl from   "../translations/pl/navigation.json";
 import navigationEn from   "../translations/en/navigation.json";
 import createTournamentEn from   "../translations/en/createTournament.json";
 import createTournamentPl from   "../translations/pl/createTournament.json";
+import tournamentPl from   "../translations/pl/tournament.json";
+import tournamentEn from   "../translations/en/tournament.json";
 
 const resources = {
 	en: {
         "tournaments": tournamentsEn,
 		"navigation": navigationEn,
-		"createTournament": createTournamentEn
+		"createTournament": createTournamentEn,
+		"tournament": tournamentEn
 	},
 	pl: {
         "tournaments": tournamentsPl,
 		"navigation": navigationPl,
-		"createTournament": createTournamentPl
+		"createTournament": createTournamentPl,
+		"tournament": tournamentPl
 	},
 };
 
