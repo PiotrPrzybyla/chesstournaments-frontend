@@ -10,9 +10,11 @@ interface ITournamentsListProps {
 const TournamentsList: React.FC<ITournamentsListProps> = ({ tournaments }) => {
   return (
     <Grid container spacing={2}>
-      {tournaments.map(({ title, location, date }, index) => (
+      {tournaments.map(({ tournament_id, title, location, date }, index) => (
         <Grid item xs={8} sm={6} md={3} key={index}>
-          <TournamentElement tournamentInfo={{ title, location, date }} />
+          <TournamentElement
+            tournamentInfo={{ tournament_id, title, location, date }}
+          />
         </Grid>
       ))}
     </Grid>

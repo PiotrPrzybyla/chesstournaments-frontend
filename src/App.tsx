@@ -22,14 +22,14 @@ const App: React.FC<IAppProps> = () => {
           <Route path="/" element={<TournamentsPage />} />
           <Route path="/tournaments" element={<TournamentsPage />} />
           <Route
-            path="/tournament:tournament_id"
+            path="/tournament/:tournament_id"
             element={<TournamentPage />}
           />
           <Route path="/createTournament" element={<CreateTournamentPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile/:user_id" element={<ProfilePage />} />
-          <Route path="/organizer:organizer_id" element={<OrganizerPage />} />
+          <Route path="/organizer/:organizer_id" element={<OrganizerPage />} />
           <Route path="/groups" element={<GroupsPage />} />
           <Route path="/group/:group_id" element={<GroupPage />} />
         </Routes>
