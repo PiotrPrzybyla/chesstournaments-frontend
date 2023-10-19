@@ -7,7 +7,7 @@ interface ITournamentsPageProps {}
 const TournamentsPage: React.FC<ITournamentsPageProps> = () => {
   return (
     <UIGenerator>
-      <TournamentsPanel></TournamentsPanel>
+      <TournamentsPanel />
     </UIGenerator>
   );
 };

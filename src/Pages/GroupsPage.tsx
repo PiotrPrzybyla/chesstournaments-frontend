@@ -1,10 +1,15 @@
 import React from "react";
 import UIGenerator from "../components/UIGenerator/UIGenerator";
+import GroupsPanel from "../components/GroupsPanel/GroupsPanel";
 
 interface IGroupsPageProps {}
 
 const GroupsPage: React.FC<IGroupsPageProps> = () => {
-	return <UIGenerator>GroupsPage</UIGenerator>;
+  return (
+    <UIGenerator>
+      <GroupsPanel />
+    </UIGenerator>
+  );
 };
 
 export default GroupsPage;

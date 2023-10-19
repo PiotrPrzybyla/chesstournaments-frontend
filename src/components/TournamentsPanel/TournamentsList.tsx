@@ -11,7 +11,7 @@ const TournamentsList: React.FC<ITournamentsListProps> = ({ tournaments }) => {
   return (
     <Grid container spacing={2}>
       {tournaments.map(({ tournament_id, title, location, date }, index) => (
-        <Grid item xs={8} sm={6} md={3} key={index}>
+        <Grid item xs={12} sm={6} md={3} key={index}>
           <TournamentElement
             tournamentInfo={{ tournament_id, title, location, date }}
           />

@@ -2,7 +2,7 @@ import { Container } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import TournamentsList from "./TournamentsList";
-import { MainTitle } from "../../styles/MainTitle";
+import { ListTitle } from "../../styles/Title";
 
 interface IOtherTournamentsProps {}
 
@@ -121,7 +121,7 @@ const OtherTournaments: React.FC<IOtherTournamentsProps> = () => {
   const { t } = useTranslation("tournaments");
   return (
     <Container maxWidth={false}>
-      <MainTitle> {`${t("otherTournaments")}`}</MainTitle>
+      <ListTitle> {`${t("otherTournaments")}`}</ListTitle>
       <TournamentsList tournaments={tournamentsTempList}></TournamentsList>
     </Container>
   );
