@@ -7,24 +7,24 @@ import navigationPl from   "../translations/pl/navigation.json";
 import navigationEn from   "../translations/en/navigation.json";
 import createTournamentEn from   "../translations/en/createTournament.json";
 import createTournamentPl from   "../translations/pl/createTournament.json";
-import tournamentPl from   "../translations/pl/tournament.json";
-import tournamentEn from   "../translations/en/tournament.json";
 import groupsPl from  "../translations/pl/groups.json";
 import groupsEn from  "../translations/en/groups.json";
+import joinLeavePl from  "../translations/pl/joinLeave.json";
+import joinLeaveEn from  "../translations/en/joinLeave.json";
 
 const resources = {
 	en: {
         "tournaments": tournamentsEn,
 		"navigation": navigationEn,
 		"createTournament": createTournamentEn,
-		"tournament": tournamentEn,
+		"joinLeave": joinLeaveEn,
 		"groups": groupsEn
 	},
 	pl: {
         "tournaments": tournamentsPl,
 		"navigation": navigationPl,
 		"createTournament": createTournamentPl,
-		"tournament": tournamentPl,
+		"joinLeave": joinLeavePl,
 		"groups": groupsPl
 	},
 };

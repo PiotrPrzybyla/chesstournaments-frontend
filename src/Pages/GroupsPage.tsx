@@ -1,5 +1,5 @@
 import React from "react";
-import UIGenerator from "../components/UIGenerator/UIGenerator";
+import UIGenerator from "../components/Generators/UIGenerator";
 import GroupsPanel from "../components/GroupsPanel/GroupsPanel";
 
 interface IGroupsPageProps {}
