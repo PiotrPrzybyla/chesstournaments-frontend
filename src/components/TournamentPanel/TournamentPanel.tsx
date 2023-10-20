@@ -3,9 +3,10 @@ import useTournamentInfo from "../../hooks/useTournamentInfo";
 import { useParams } from "react-router-dom";
 import { Box, Button, Typography, Container } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import useIsParticipant from "../../hooks/useIsParticipant";
 import { MainTitle } from "../../styles/Title";
-import { Description } from "./styles";
+import { Description } from "../Generators/styles";
+import JoinLeaveGenerator from "../Generators/JoinLeaveGenerator";
+import getIsParticipant from "./utils";
 
 interface ITournamentPanelProps {}
 
@@ -14,22 +15,19 @@ const TournamentPanel: React.FC<ITournamentPanelProps> = () => {
   const { title, description, date, time, location } =
     useTournamentInfo(tournament_id);
   const user_id = 1;
-  const isParticipant = useIsParticipant(tournament_id, user_id);
+  const isParticipant = getIsParticipant(tournament_id, user_id);
   const { t } = useTranslation("tournament");
   return (
-    <Container maxWidth="md">
-      <Box textAlign="center" margin="60px">
-        <MainTitle>{title}</MainTitle>
-        <Typography>
-          {date} {time}
-        </Typography>
-        <Typography>{location}</Typography>
-        <Description>{description}</Description>
-        <Button color={isParticipant ? "error" : "success"} variant="contained">
-          {isParticipant ? `${t("leave")}` : `${t("join")}`}
-        </Button>
-      </Box>
-    </Container>
+    <JoinLeaveGenerator
+      title={title}
+      description={description}
+      isMember={isParticipant}
+    >
+      <Typography>
+        {date} {time}
+      </Typography>
+      <Typography>{location}</Typography>
+    </JoinLeaveGenerator>
   );
 };
 
