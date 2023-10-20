@@ -17,7 +17,7 @@ const JoinLeaveGenerator: React.FC<IJoinLeaveGeneratorProps> = ({
   isMember,
   children,
 }) => {
-  const { t } = useTranslation("group");
+  const { t } = useTranslation("joinLeave");
   return (
     <Container maxWidth="md">
       <Box textAlign="center" margin="60px">
