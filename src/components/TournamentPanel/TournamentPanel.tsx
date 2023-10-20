@@ -1,10 +1,7 @@
 import React from "react";
 import useTournamentInfo from "../../hooks/useTournamentInfo";
 import { useParams } from "react-router-dom";
-import { Box, Button, Typography, Container } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { MainTitle } from "../../styles/Title";
-import { Description } from "../Generators/styles";
+import { Typography } from "@mui/material";
 import JoinLeaveGenerator from "../Generators/JoinLeaveGenerator";
 import getIsParticipant from "./utils";
 
@@ -16,7 +13,6 @@ const TournamentPanel: React.FC<ITournamentPanelProps> = () => {
     useTournamentInfo(tournament_id);
   const user_id = 1;
   const isParticipant = getIsParticipant(tournament_id, user_id);
-  const { t } = useTranslation("tournament");
   return (
     <JoinLeaveGenerator
       title={title}
