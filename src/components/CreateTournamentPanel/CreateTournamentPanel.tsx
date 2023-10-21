@@ -1,7 +1,11 @@
-import { Button, Container, FormControl } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FormTextField, FormTitle } from "./styles";
+import {
+  CenterWideFormControl,
+  FormTextField,
+  FormTitle,
+} from "../../styles/Form";
 
 interface ICreateTournamentPanelProps {}
 
@@ -9,7 +13,7 @@ const CreateTournamentPanel: React.FC<ICreateTournamentPanelProps> = () => {
   const { t } = useTranslation("createTournament");
   return (
     <Container maxWidth="sm">
-      <FormControl>
+      <CenterWideFormControl>
         <FormTitle>{`${t("title")}`}</FormTitle>
         <FormTextField type="text" variant="outlined" label={`${t("name")}`} />
         <FormTextField type="text" variant="outlined" label={`${t("city")}`} />
@@ -28,7 +32,7 @@ const CreateTournamentPanel: React.FC<ICreateTournamentPanelProps> = () => {
           label={`${t("description")}`}
         />
         <Button>{`${t("title")}`}</Button>
-      </FormControl>
+      </CenterWideFormControl>
     </Container>
   );
 };
