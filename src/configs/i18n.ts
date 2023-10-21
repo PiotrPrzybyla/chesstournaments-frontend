@@ -11,6 +11,8 @@ import groupsPl from  "../translations/pl/groups.json";
 import groupsEn from  "../translations/en/groups.json";
 import joinLeavePl from  "../translations/pl/joinLeave.json";
 import joinLeaveEn from  "../translations/en/joinLeave.json";
+import loginRegisterPl from  "../translations/pl/loginRegister.json";
+import loginRegisterEn from  "../translations/en/loginRegister.json";
 
 const resources = {
 	en: {
@@ -18,14 +20,16 @@ const resources = {
 		"navigation": navigationEn,
 		"createTournament": createTournamentEn,
 		"joinLeave": joinLeaveEn,
-		"groups": groupsEn
+		"groups": groupsEn,
+		"loginRegister": loginRegisterEn
 	},
 	pl: {
         "tournaments": tournamentsPl,
 		"navigation": navigationPl,
 		"createTournament": createTournamentPl,
 		"joinLeave": joinLeavePl,
-		"groups": groupsPl
+		"groups": groupsPl,
+		"loginRegister": loginRegisterPl
 	},
 };
 

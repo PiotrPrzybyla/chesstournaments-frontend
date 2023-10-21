@@ -6,7 +6,6 @@
 		{ "name": "Moje grupy", "link": "/groups" }
 	],
 	"organizer": "Panel Organizatora",
-	"login": "Zaloguj się",
-	"register": "Zarejestruj się",
+	"login": "Logowanie",
 	"profile": "Mój profil"
 }

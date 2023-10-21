@@ -10,6 +10,7 @@ interface INavigationProps {}
 const Navigation: React.FC<INavigationProps> = () => {
   const { t } = useTranslation("navigation");
   const pages: INavElement[] = t("pages", { returnObjects: true });
+  const isLogged = false;
   return (
     <NavAppBar position="static">
       <Container maxWidth="xl">
@@ -30,10 +31,14 @@ const Navigation: React.FC<INavigationProps> = () => {
             </Grid>
             <Grid item>
               <Grid container direction={"row"} alignItems={"center"}>
-                <NavElement name={t("organizer")} link={"/organizer"} />
-                <NavElement name={t("register")} link={"/register"} />
-                <NavElement name={t("login")} link={"/login"} />
-                <NavElement name={t("profile")} link={"/profile"} />
+                {isLogged ? (
+                  <>
+                    <NavElement name={t("organizer")} link={"/organizer"} />
+                    <NavElement name={t("profile")} link={"/profile"} />
+                  </>
+                ) : (
+                  <NavElement name={t("login")} link={"/login"} />
+                )}
               </Grid>
             </Grid>
           </Grid>
