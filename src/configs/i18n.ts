@@ -13,6 +13,8 @@ import joinLeavePl from  "../translations/pl/joinLeave.json";
 import joinLeaveEn from  "../translations/en/joinLeave.json";
 import loginRegisterPl from  "../translations/pl/loginRegister.json";
 import loginRegisterEn from  "../translations/en/loginRegister.json";
+import myProfileEn from  "../translations/en/myProfile.json";
+import myProfilePl from  "../translations/pl/myProfile.json";
 
 const resources = {
 	en: {
@@ -21,7 +23,8 @@ const resources = {
 		"createTournament": createTournamentEn,
 		"joinLeave": joinLeaveEn,
 		"groups": groupsEn,
-		"loginRegister": loginRegisterEn
+		"loginRegister": loginRegisterEn,
+		"myProfile": myProfileEn
 	},
 	pl: {
         "tournaments": tournamentsPl,
@@ -29,7 +32,8 @@ const resources = {
 		"createTournament": createTournamentPl,
 		"joinLeave": joinLeavePl,
 		"groups": groupsPl,
-		"loginRegister": loginRegisterPl
+		"loginRegister": loginRegisterPl,
+		"myProfile": myProfilePl
 	},
 };
 

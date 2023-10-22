@@ -10,7 +10,7 @@ interface INavigationProps {}
 const Navigation: React.FC<INavigationProps> = () => {
   const { t } = useTranslation("navigation");
   const pages: INavElement[] = t("pages", { returnObjects: true });
-  const isLogged = false;
+  const isLogged = true;
   return (
     <NavAppBar position="static">
       <Container maxWidth="xl">
@@ -34,7 +34,7 @@ const Navigation: React.FC<INavigationProps> = () => {
                 {isLogged ? (
                   <>
                     <NavElement name={t("organizer")} link={"/organizer"} />
-                    <NavElement name={t("profile")} link={"/profile"} />
+                    <NavElement name={t("profile")} link={"/profile/1"} />
                   </>
                 ) : (
                   <NavElement name={t("login")} link={"/login"} />
