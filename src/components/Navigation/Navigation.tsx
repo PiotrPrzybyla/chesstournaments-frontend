@@ -4,13 +4,18 @@ import { useTranslation } from "react-i18next";
 import { INavElement } from "./types";
 import { LogoTypography, NavAppBar } from "./styles";
 import NavElement from "./NavElement";
+import { getUserId } from "../../utils/getUserId";
+import { getOrganizerId } from "../../utils/getOrganizerId";
+import { getIsLogged } from "../../utils/getIsLogged";
 
 interface INavigationProps {}
 
 const Navigation: React.FC<INavigationProps> = () => {
   const { t } = useTranslation("navigation");
   const pages: INavElement[] = t("pages", { returnObjects: true });
-  const isLogged = true;
+  const user_id = getUserId();
+  const organizerId = getOrganizerId();
+  const isLogged = getIsLogged();
   return (
     <NavAppBar position="static">
       <Container maxWidth="xl">
@@ -24,8 +29,8 @@ const Navigation: React.FC<INavigationProps> = () => {
             <Grid item>
               <Grid container direction={"row"} alignItems={"center"}>
                 <LogoTypography>ChessTournaments</LogoTypography>
-                {pages.map(({ name, link }: INavElement) => (
-                  <NavElement name={name} link={link} />
+                {pages.map(({ name, link }: INavElement, index) => (
+                  <NavElement name={name} link={link} key={index} />
                 ))}
               </Grid>
             </Grid>
@@ -33,8 +38,14 @@ const Navigation: React.FC<INavigationProps> = () => {
               <Grid container direction={"row"} alignItems={"center"}>
                 {isLogged ? (
                   <>
-                    <NavElement name={t("organizer")} link={"/organizer"} />
-                    <NavElement name={t("profile")} link={"/profile/1"} />
+                    <NavElement
+                      name={t("organizer")}
+                      link={`/organizer/${organizerId}`}
+                    />
+                    <NavElement
+                      name={t("profile")}
+                      link={`/profile/${user_id}`}
+                    />
                   </>
                 ) : (
                   <NavElement name={t("login")} link={"/login"} />
