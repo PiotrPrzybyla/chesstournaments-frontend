@@ -6,14 +6,18 @@ import { CenterShortFormControl, FormTextField } from "../../styles/Form";
 import { useUserInfo } from "../../hooks/useUserInfo";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import LoadingCircle from "../LoadingCIrcle/LoadingCircle";
 
 interface IMyProfilePanelProps {}
 
 const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
   const { t } = useTranslation("myProfile");
   const { user_id } = useParams<{ user_id: string }>();
-  const { username, name, surname, isOrganizer } = useUserInfo(user_id);
-  return (
+  const { username, name, surname, isOrganizer, isLoading } =
+    useUserInfo(user_id);
+  return isLoading ? (
+    <LoadingCircle />
+  ) : (
     <Container maxWidth="xs">
       <CenterShortFormControl>
         <MainTitle>My Profile</MainTitle>

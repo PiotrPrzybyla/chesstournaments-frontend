@@ -1,5 +1,5 @@
 export const checkIfOrganizerOfTournament = (
   tournament_id: string | undefined
 ) => {
-  return true;
+  return false;
 };
