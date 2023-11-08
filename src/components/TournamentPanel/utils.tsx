@@ -5,6 +5,7 @@ export const joinTournament = (
   tournament_id: string | undefined,
   user_id: string | null
 ): void => {
+  console.log(tournament_id, user_id);
   if (user_id === null) {
     console.error("User ID is null");
     return;

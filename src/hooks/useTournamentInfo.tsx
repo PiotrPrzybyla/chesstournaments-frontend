@@ -40,7 +40,7 @@ const useTournamentInfo = (
         console.error(error);
       });
     fetchHandler({
-      url: `${BASE_BACKEND_URL}/api/tournament/isMember/${getUserId()}/${tournament_id}`,
+      url: `${BASE_BACKEND_URL}/api/tournament/isMember/${tournament_id}/${getUserId()}`,
       method: "GET",
     })
       .then((data) => {
