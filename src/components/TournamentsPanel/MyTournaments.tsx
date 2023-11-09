@@ -3,6 +3,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import TournamentsList from "./TournamentsList";
 import { ListTitle } from "../../styles/Title";
+import { useTournaments } from "../../hooks/useTournaments";
+import { useUserInfo } from "../../hooks/useUserInfo";
+import { getUserId } from "../../utils/getUserId";
+import LoadingCircle from "../LoadingCIrcle/LoadingCircle";
 
 interface IMyTournamentsProps {}
 
@@ -35,10 +39,16 @@ const tournamentsTempList = [
 
 const MyTournaments: React.FC<IMyTournamentsProps> = () => {
   const { t } = useTranslation("tournaments");
-  return (
+  const userId = getUserId();
+  const { tournaments, isLoading } = useTournaments(
+    `/api/tournament/user/${userId}`
+  );
+  return isLoading ? (
+    <LoadingCircle />
+  ) : (
     <Container maxWidth={false}>
       <ListTitle> {`${t("myTournaments")}`}</ListTitle>
-      <TournamentsList tournaments={tournamentsTempList}></TournamentsList>
+      <TournamentsList tournaments={tournaments}></TournamentsList>
     </Container>
   );
 };

@@ -7,14 +7,30 @@ import { useUserInfo } from "../../hooks/useUserInfo";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import LoadingCircle from "../LoadingCIrcle/LoadingCircle";
+import { fetchHandler } from "../../utils/fetchHandler";
+import { useNavigate } from "react-router-dom";
+import { BASE_BACKEND_URL } from "../../utils/consts";
 
 interface IMyProfilePanelProps {}
 
 const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
   const { t } = useTranslation("myProfile");
   const { user_id } = useParams<{ user_id: string }>();
+  const navigate = useNavigate();
   const { username, name, surname, isOrganizer, isLoading } =
     useUserInfo(user_id);
+  const updateToOrganizer = () => {
+    fetchHandler({
+      url: `${BASE_BACKEND_URL}/api/organizer/user/${user_id}`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then(() => {
+      navigate(`#`);
+    });
+  };
   return isLoading ? (
     <LoadingCircle />
   ) : (
@@ -26,7 +42,7 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
         <FormTextField defaultValue={surname} label={`${t("surname")}`} />
         <Button>{`${t("saveBtn")}`}</Button>
         {isOrganizer || (
-          <Button variant="contained" color="error">
+          <Button variant="contained" color="error" onClick={updateToOrganizer}>
             {`${t("updateBtn")}`}
           </Button>
         )}

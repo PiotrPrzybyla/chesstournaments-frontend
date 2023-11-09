@@ -15,13 +15,13 @@ type TournamentData = {
   date: string;
 };
 
-export const useTournaments = (): ITournamentsListProps => {
+export const useTournaments = (path: string): ITournamentsListProps => {
   const [tournaments, setTournaments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchHandler({
-      url: `${BASE_BACKEND_URL}/api/tournament/all`,
+      url: `${BASE_BACKEND_URL}${path}`,
       method: "GET",
     })
       .then((data) => {
