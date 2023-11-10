@@ -6,7 +6,7 @@ import { LogoTypography, NavAppBar } from "./styles";
 import NavElement from "./NavElement";
 import { getUserId } from "../../utils/getUserId";
 import { getOrganizerId } from "../../utils/getOrganizerId";
-import { getIsLogged } from "../../utils/getIsLogged";
+import { useIsLogged } from "../../hooks/useIsLogged";
 
 interface INavigationProps {}
 
@@ -15,7 +15,7 @@ const Navigation: React.FC<INavigationProps> = () => {
   const pages: INavElement[] = t("pages", { returnObjects: true });
   const user_id = getUserId();
   const organizerId = getOrganizerId();
-  const isLogged = getIsLogged();
+  const isLogged = useIsLogged();
   return (
     <NavAppBar position="static">
       <Container maxWidth="xl">

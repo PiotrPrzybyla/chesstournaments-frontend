@@ -18,6 +18,7 @@ export async function fetchHandler({
       method,
       headers,
       body: JSON.stringify(body),
+      credentials: "include",
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

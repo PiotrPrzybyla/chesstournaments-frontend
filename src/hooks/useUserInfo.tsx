@@ -26,6 +26,9 @@ export const useUserInfo = (
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/user/${user_id}`,
       method: "GET",
+      headers: {
+        AccessControlAllowOrigin: "true",
+      },
     })
       .then((data) => {
         setName(data.name);

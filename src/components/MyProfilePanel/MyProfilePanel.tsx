@@ -31,6 +31,18 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
       navigate(`#`);
     });
   };
+  const handleLogout = () => {
+    fetchHandler({
+      url: `${BASE_BACKEND_URL}/api/user/logout`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then((data) => {
+      console.log(data);
+    });
+  };
   return isLoading ? (
     <LoadingCircle />
   ) : (
@@ -46,6 +58,7 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
             {`${t("updateBtn")}`}
           </Button>
         )}
+        <Button onClick={handleLogout}>Logout</Button>
       </CenterShortFormControl>
     </Container>
   );

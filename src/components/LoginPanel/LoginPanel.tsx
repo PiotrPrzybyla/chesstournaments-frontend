@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginRegisterGenerator from "../Generators/LoginRegisterGenerator";
 import { FormTextField } from "../../styles/Form";
 import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../configs/firebase";
+import { fetchHandler } from "../../utils/fetchHandler";
+import { BASE_BACKEND_URL } from "../../utils/consts";
 
 interface ILoginPanelProps {}
 
 const LoginPanel: React.FC<ILoginPanelProps> = () => {
   const { t } = useTranslation("loginRegister");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const token = await userCredential.user.getIdToken();
+      fetchHandler({
+        url: `${BASE_BACKEND_URL}/api/user/login`,
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((data) => {
+        localStorage.setItem("sessionToken", data.sessionToken);
+        localStorage.setItem("uid", data.uid);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <LoginRegisterGenerator
       title={`${t("login")}`}
@@ -17,14 +46,18 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
       <FormTextField
         type="text"
         variant="outlined"
-        label={`${t("username")}`}
+        label={`${t("email")}`}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <FormTextField
         type="password"
         variant="outlined"
         label={`${t("password")}`}
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <Button variant="contained">{`${t("login")}`}</Button>
+      <Button variant="contained" onClick={handleLogin}>{`${t(
+        "login"
+      )}`}</Button>
     </LoginRegisterGenerator>
   );
 };
