@@ -4,6 +4,7 @@ import { fetchHandler } from "../utils/fetchHandler";
 interface IParticipant {
   user_id: string;
   name: string;
+  surname?: string;
 }
 
 interface IUseParticipantsReturnValue {
@@ -19,6 +20,7 @@ export const useParticipants = (
       data.map((user: any) => ({
         user_id: user.userId,
         name: user.name,
+        surname: user.surname,
       }))
     );
   };

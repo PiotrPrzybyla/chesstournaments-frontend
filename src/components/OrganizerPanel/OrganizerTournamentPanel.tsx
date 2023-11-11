@@ -19,8 +19,12 @@ const OrganizerTournamentPanel: React.FC<IOrganizerTournamentPanelProps> = ({
     <Container>
       <MainTitle>{title}</MainTitle>
       <ListTitle>{`${t("participants")}`}</ListTitle>
-      {participants.map(({ name, user_id }, index) => {
-        return <Typography key={user_id}>{`${index + 1}. ${name}`}</Typography>;
+      {participants.map(({ name, surname, user_id }, index) => {
+        return (
+          <Typography key={user_id}>{`${
+            index + 1
+          }. ${name} ${surname}`}</Typography>
+        );
       })}
     </Container>
   );
