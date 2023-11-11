@@ -40,7 +40,9 @@ const RegisterPanel: React.FC<IRegisterPanelProps> = () => {
         password
       );
       const idToken = await userCredential.user.getIdToken();
-      console.log(idToken);
+      const goodCallback = async (response: Response) => {
+        navigate("/");
+      };
       fetchHandler({
         url: `${BASE_BACKEND_URL}/api/user/register`,
         method: "POST",
@@ -56,8 +58,7 @@ const RegisterPanel: React.FC<IRegisterPanelProps> = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-      }).then(() => {
-        navigate("/login");
+        goodCallback: goodCallback,
       });
     } catch (error) {
       if (error instanceof Error) {

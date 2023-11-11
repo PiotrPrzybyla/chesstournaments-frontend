@@ -46,6 +46,10 @@ const CreateTournamentPanel: React.FC<ICreateTournamentPanelProps> = () => {
   ) => {
     setDescription(event.target.value);
   };
+  const goodCallback = async (response: Response) => {
+    const data = await response.json();
+    navigate(`/tournament/${data.tournamentId}`);
+  };
   const submitForm = () => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/tournament`,
@@ -62,13 +66,8 @@ const CreateTournamentPanel: React.FC<ICreateTournamentPanelProps> = () => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-    })
-      .then((data) => {
-        navigate(`/tournament/${data.tournamentId}`);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      goodCallback: goodCallback,
+    });
   };
   return (
     <Container maxWidth="sm">

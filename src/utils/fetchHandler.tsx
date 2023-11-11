@@ -5,6 +5,8 @@ interface FetchHandlerProps {
   method: RequestMethod;
   headers?: HeadersInit;
   body?: any;
+  goodCallback: (response: Response) => void;
+  badCallback?: (response: Response) => void;
 }
 
 export async function fetchHandler({
@@ -12,6 +14,8 @@ export async function fetchHandler({
   method,
   headers,
   body,
+  goodCallback,
+  badCallback,
 }: FetchHandlerProps) {
   try {
     const response = await fetch(url, {
@@ -21,12 +25,16 @@ export async function fetchHandler({
       credentials: "include",
     });
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      if (badCallback) {
+        badCallback(response);
+      } else {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    } else {
+      if (goodCallback) {
+        goodCallback(response);
+      }
     }
-
-    const data = await response.json();
-
-    return data;
   } catch (error) {
     const errorMessage = (error as Error).message;
     throw new Error(`Error fetching data: ${errorMessage}`);

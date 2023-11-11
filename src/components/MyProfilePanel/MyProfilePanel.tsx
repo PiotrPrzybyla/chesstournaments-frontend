@@ -19,6 +19,12 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
   const navigate = useNavigate();
   const { username, name, surname, isOrganizer, isLoading } =
     useUserInfo(user_id);
+  const updateToOrganizerGoodCallback = async (response: Response) => {
+    navigate(`#`);
+  };
+  const handleLogoutGoodCallback = async (response: Response) => {
+    navigate(`/`);
+  };
   const updateToOrganizer = () => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/organizer/user/${user_id}`,
@@ -27,8 +33,7 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-    }).then(() => {
-      navigate(`#`);
+      goodCallback: updateToOrganizerGoodCallback,
     });
   };
   const handleLogout = () => {
@@ -39,8 +44,7 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-    }).then((data) => {
-      navigate(`/`);
+      goodCallback: handleLogoutGoodCallback,
     });
   };
   return isLoading ? (

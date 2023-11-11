@@ -18,28 +18,26 @@ type TournamentData = {
 export const useTournaments = (path: string): ITournamentsListProps => {
   const [tournaments, setTournaments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const goodCallback = async (response: Response) => {
+    const data = await response.json();
+    setTournaments(
+      data.map(({ tournamentId, name, address, date }: TournamentData) => {
+        return {
+          tournament_id: tournamentId,
+          title: name,
+          location: address,
+          date: formatDate(date.slice(0, 10)),
+        };
+      })
+    );
+    setIsLoading(false);
+  };
   useEffect(() => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}${path}`,
       method: "GET",
-    })
-      .then((data) => {
-        setTournaments(
-          data.map(({ tournamentId, name, address, date }: TournamentData) => {
-            return {
-              tournament_id: tournamentId,
-              title: name,
-              location: address,
-              date: formatDate(date.slice(0, 10)),
-            };
-          })
-        );
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      goodCallback: goodCallback,
+    });
   }, []);
   return {
     tournaments,

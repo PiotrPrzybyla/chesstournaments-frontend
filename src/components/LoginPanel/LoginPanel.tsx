@@ -23,6 +23,9 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
         email,
         password
       );
+      const goodCallback = async (response: Response) => {
+        navigate("/");
+      };
       const token = await userCredential.user.getIdToken();
       fetchHandler({
         url: `${BASE_BACKEND_URL}/api/user/login`,
@@ -30,8 +33,7 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then(() => {
-        navigate("/");
+        goodCallback: goodCallback,
       });
     } catch (error) {
       console.error(error);

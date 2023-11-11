@@ -22,33 +22,44 @@ export const useUserInfo = (
   const [isOrganizer, setIsOrganizer] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchUserGoodCallback = async (response: Response) => {
+    const data = await response.json();
+    setName(data.name);
+    setSurname(data.surname);
+    setUsername(data.login);
+    setIsLoading(false);
+  };
+  const fetchOrganizerGoodCallback = async (response: Response) => {
+    const data = await response.json();
+    setIsOrganizer(data);
+  };
+  const fetchOrganizerBadCallback = async (error: any) => {
+    setIsOrganizer(false);
+  };
+  const fetchUser = () => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/user/${user_id}`,
       method: "GET",
       headers: {
         AccessControlAllowOrigin: "true",
       },
-    })
-      .then((data) => {
-        setName(data.name);
-        setSurname(data.surname);
-        setUsername(data.login);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      goodCallback: fetchUserGoodCallback,
+    });
+  };
+  const fetchOrganizer = () => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/organizer/user/${user_id}`,
       method: "GET",
-    })
-      .then(() => {
-        setIsOrganizer(true);
-      })
-      .catch((error) => {
-        setIsOrganizer(false);
-      });
+      headers: {
+        AccessControlAllowOrigin: "true",
+      },
+      goodCallback: fetchOrganizerGoodCallback,
+      badCallback: fetchOrganizerBadCallback,
+    });
+  };
+  useEffect(() => {
+    fetchUser();
+    fetchOrganizer();
   }, []);
 
   return {

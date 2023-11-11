@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import UIGenerator from "../components/Generators/UIGenerator";
 import TournamentPanel from "../components/TournamentPanel/TournamentPanel";
 import { useParams } from "react-router";
-import { checkIfOrganizerOfTournament } from "../utils/checkIfOrganizerOfTournament";
 import OrganizerTournamentPanel from "../components/OrganizerPanel/OrganizerTournamentPanel";
 import { useIsOrganizerOfTournament } from "../hooks/useIsOrganizerOfTournament";
 

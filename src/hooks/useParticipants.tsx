@@ -13,24 +13,24 @@ export const useParticipants = (
   tournament_id: string | undefined
 ): IUseParticipantsReturnValue => {
   const [participants, setParticipants] = useState<IParticipant[]>([]);
+  const goodCallback = async (response: Response) => {
+    const data = await response.json();
+    setParticipants(
+      data.map((user: any) => ({
+        user_id: user.userId,
+        name: user.name,
+      }))
+    );
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchHandler({
-          url: `http://localhost:8080/api/tournament/users/${tournament_id}`,
-          method: "GET",
-        });
-
-        setParticipants(
-          response.map((user: any) => ({
-            user_id: user.userId,
-            name: user.name,
-          }))
-        );
-      } catch (error) {
-        console.error(error);
-      }
+    const fetchData = () => {
+      fetchHandler({
+        url: `http://localhost:8080/api/tournament/users/${tournament_id}`,
+        method: "GET",
+        goodCallback: goodCallback,
+      });
     };
+
     fetchData();
   }, [tournament_id]);
   return {

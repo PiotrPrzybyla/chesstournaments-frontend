@@ -20,24 +20,26 @@ export const useOrganizerTournaments = (
   const [tournaments, setTournaments] = useState<IOrganizerTournament[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const organizerId = getOrganizerId();
+  const goodCallback = async (response: Response) => {
+    const data = await response.json();
+    setTournaments(
+      data.map((tournament: any) => {
+        return {
+          tournament_id: tournament.tournamentId,
+          title: tournament.name,
+          participants: tournament.users.length,
+          maxParticipants: tournament.participantsAmount,
+          description: tournament.description,
+        };
+      })
+    );
+    setIsLoading(false);
+  };
   useEffect(() => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/tournament/organizer/${status}/${organizerId}`,
       method: "GET",
-    }).then((data) => {
-      setTournaments(
-        data.map((tournament: any) => {
-          return {
-            tournament_id: tournament.tournamentId,
-            title: tournament.name,
-            participants: tournament.users.length,
-            maxParticipants: tournament.participantsAmount,
-            description: tournament.description,
-          };
-        })
-      );
-      console.log(data);
-      setIsLoading(false);
+      goodCallback: goodCallback,
     });
   }, []);
 

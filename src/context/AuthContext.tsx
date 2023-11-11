@@ -17,19 +17,21 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
   const checkSession = async () => {
-    try {
-      await fetchHandler({
-        url: `${BASE_BACKEND_URL}/api/user/isLogged`,
-        method: "GET",
-        headers: {
-          AccessControlAllowOrigin: "true",
-        },
-      });
+    const goodCallback = async (response: Response) => {
       setIsLoggedIn(true);
-    } catch (error) {
-      console.error("Error checking session", error);
+    };
+    const badCallback = async (response: Response) => {
       setIsLoggedIn(false);
-    }
+    };
+    await fetchHandler({
+      url: `${BASE_BACKEND_URL}/api/user/isLogged`,
+      method: "GET",
+      headers: {
+        AccessControlAllowOrigin: "true",
+      },
+      goodCallback: goodCallback,
+      badCallback: badCallback,
+    });
   };
 
   useEffect(() => {

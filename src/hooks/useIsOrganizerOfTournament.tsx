@@ -4,27 +4,22 @@ import { getOrganizerId } from "../utils/getOrganizerId";
 
 export const useIsOrganizerOfTournament = (
   tournament_id: string | undefined
-) => {
-  const [isOrganizerOfTournament, setIsOrganizerOfTournament] = useState(false);
+): boolean => {
   const organizerId = getOrganizerId();
+  const [isOrganizerOfTournament, setIsOrganizerOfTournament] = useState(false);
+  const goodCallback = async (response: Response) => {
+    const data = await response.json();
+    if (parseInt(organizerId || "") === data.organizer.organizerId) return true;
+    else return false;
+  };
   useEffect(() => {
-    if (organizerId) {
-      fetchHandler({
-        url: `http://localhost:8080/api/tournament/${tournament_id}`,
-        method: "GET",
-      })
-        .then((data) => {
-          if (parseInt(organizerId) === data.organizer.organizerId)
-            setIsOrganizerOfTournament(true);
-          else setIsOrganizerOfTournament(false);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      setIsOrganizerOfTournament(false);
-    }
-  }, []);
+    if (!organizerId) setIsOrganizerOfTournament(false);
+    fetchHandler({
+      url: `http://localhost:8080/api/tournament/${tournament_id}`,
+      method: "GET",
+      goodCallback: goodCallback,
+    });
+  }, [tournament_id, organizerId, goodCallback]);
 
   return isOrganizerOfTournament;
 };

@@ -5,7 +5,6 @@ export const joinTournament = (
   tournament_id: string | undefined,
   user_id: string | null
 ): void => {
-  console.log(tournament_id, user_id);
   if (user_id === null) {
     console.error("User ID is null");
     return;
@@ -14,17 +13,14 @@ export const joinTournament = (
     console.error("Tournament ID or User ID is null or undefined");
     return;
   }
-
+  const goodCallback = async (response: Response) => {
+    window.location.reload();
+  };
   fetchHandler({
     url: `${BASE_BACKEND_URL}/api/tournament/join`,
     method: "POST",
     body: { tournamentId: parseInt(tournament_id), userId: parseInt(user_id) },
     headers: { "Content-Type": "application/json", Accept: "application/json" },
-  })
-    .then(() => {
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    goodCallback: goodCallback,
+  });
 };

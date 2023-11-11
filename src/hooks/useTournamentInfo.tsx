@@ -24,32 +24,36 @@ const useTournamentInfo = (
   const [isLoading, setIsLoading] = useState(true);
   const [isParticipant, setIsParticipant] = useState(false);
 
-  useEffect(() => {
+  const fetchTournamentGoodCallback = async (response: Response) => {
+    const data = await response.json();
+    setTitle(data.name);
+    setLocation(data.address);
+    setDate(formatDate(data.date.slice(0, 10)));
+    setTime(data.date.slice(11, 16));
+    setDescription(data.description);
+  };
+  const fetchIsMemberGoodCallback = async (response: Response) => {
+    const data = await response.json();
+    setIsParticipant(data.isMember);
+    setIsLoading(false);
+  };
+  const fetchTournament = () => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/tournament/${tournament_id}`,
       method: "GET",
-    })
-      .then((data) => {
-        setTitle(data.name);
-        setLocation(data.address);
-        setDate(formatDate(data.date.slice(0, 10)));
-        setTime(data.date.slice(11, 16));
-        setDescription(data.description);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      goodCallback: fetchTournamentGoodCallback,
+    });
+  };
+  const fetchIsMember = () => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/tournament/isMember/${tournament_id}/${getUserId()}`,
       method: "GET",
-    })
-      .then((data) => {
-        setIsParticipant(data.isMember);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      goodCallback: fetchIsMemberGoodCallback,
+    });
+  };
+  useEffect(() => {
+    fetchTournament();
+    fetchIsMember();
   }, []);
   return {
     title,
