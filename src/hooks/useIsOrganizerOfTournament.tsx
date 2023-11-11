@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { checkIfOrganizerOfTournament } from "../utils/checkIfOrganizerOfTournament";
 import { fetchHandler } from "../utils/fetchHandler";
 import { getOrganizerId } from "../utils/getOrganizerId";
 

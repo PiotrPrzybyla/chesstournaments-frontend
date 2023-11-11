@@ -9,12 +9,13 @@ import { red } from "@mui/material/colors";
 import { ErrorMessage } from "../../styles/Text";
 import { fetchHandler } from "../../utils/fetchHandler";
 import { BASE_BACKEND_URL } from "../../utils/consts";
+import { useNavigate } from "react-router-dom";
 
 interface IRegisterPanelProps {}
 
 const RegisterPanel: React.FC<IRegisterPanelProps> = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation("loginRegister");
-  const [login, setLogin] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [username, setUsername] = useState("");
@@ -55,8 +56,8 @@ const RegisterPanel: React.FC<IRegisterPanelProps> = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-      }).then((data) => {
-        console.log(data);
+      }).then(() => {
+        navigate("/login");
       });
     } catch (error) {
       if (error instanceof Error) {

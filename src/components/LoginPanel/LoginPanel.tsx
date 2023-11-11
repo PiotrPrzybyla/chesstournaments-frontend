@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../configs/firebase";
 import { fetchHandler } from "../../utils/fetchHandler";
 import { BASE_BACKEND_URL } from "../../utils/consts";
+import { useNavigate } from "react-router-dom";
 
 interface ILoginPanelProps {}
 
@@ -14,7 +15,7 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
   const { t } = useTranslation("loginRegister");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const handleLogin = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -29,9 +30,8 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((data) => {
-        localStorage.setItem("sessionToken", data.sessionToken);
-        localStorage.setItem("uid", data.uid);
+      }).then(() => {
+        navigate("/");
       });
     } catch (error) {
       console.error(error);

@@ -40,7 +40,7 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
         Accept: "application/json",
       },
     }).then((data) => {
-      console.log(data);
+      navigate(`/`);
     });
   };
   return isLoading ? (

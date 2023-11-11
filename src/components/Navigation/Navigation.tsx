@@ -6,7 +6,7 @@ import { LogoTypography, NavAppBar } from "./styles";
 import NavElement from "./NavElement";
 import { getUserId } from "../../utils/getUserId";
 import { getOrganizerId } from "../../utils/getOrganizerId";
-import { useIsLogged } from "../../hooks/useIsLogged";
+import { useAuth } from "../../context/AuthContext";
 
 interface INavigationProps {}
 
@@ -15,7 +15,7 @@ const Navigation: React.FC<INavigationProps> = () => {
   const pages: INavElement[] = t("pages", { returnObjects: true });
   const user_id = getUserId();
   const organizerId = getOrganizerId();
-  const isLogged = useIsLogged();
+  const { isLoggedIn } = useAuth();
   return (
     <NavAppBar position="static">
       <Container maxWidth="xl">
@@ -36,7 +36,7 @@ const Navigation: React.FC<INavigationProps> = () => {
             </Grid>
             <Grid item>
               <Grid container direction={"row"} alignItems={"center"}>
-                {isLogged ? (
+                {isLoggedIn ? (
                   <>
                     <NavElement
                       name={t("organizer")}
