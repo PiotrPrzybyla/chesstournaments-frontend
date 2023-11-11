@@ -14,6 +14,7 @@ import { I18nextProvider } from "react-i18next";
 import "./configs/i18n";
 import ProtectedRoute from "./Routes/PotectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import OrganizerRoute from "./Routes/OrganizerRoute";
 interface IAppProps {}
 
 const App: React.FC<IAppProps> = () => {
@@ -36,7 +37,9 @@ const App: React.FC<IAppProps> = () => {
               path="/createTournament"
               element={
                 <ProtectedRoute>
-                  <CreateTournamentPage />
+                  <OrganizerRoute>
+                    <CreateTournamentPage />
+                  </OrganizerRoute>
                 </ProtectedRoute>
               }
             />
@@ -54,7 +57,9 @@ const App: React.FC<IAppProps> = () => {
               path="/organizer"
               element={
                 <ProtectedRoute>
-                  <OrganizerPage />
+                  <OrganizerRoute>
+                    <OrganizerPage />
+                  </OrganizerRoute>
                 </ProtectedRoute>
               }
             />

@@ -4,6 +4,7 @@ import { BASE_BACKEND_URL } from "../utils/consts";
 
 interface IAuthContextType {
   isLoggedIn: boolean | null;
+  isOrganizer: boolean | null;
   checkSession: () => void;
 }
 
@@ -15,30 +16,51 @@ const AuthContext = createContext<IAuthContextType | null>(null);
 
 export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
-
-  const checkSession = async () => {
-    const goodCallback = async (response: Response) => {
-      setIsLoggedIn(true);
-    };
-    const badCallback = async (response: Response) => {
-      setIsLoggedIn(false);
-    };
+  const [isOrganizer, setIsOrganizer] = useState<boolean | null>(null);
+  const loggedGoodCallback = async (response: Response) => {
+    setIsLoggedIn(true);
+  };
+  const loggedBadCallback = async (response: Response) => {
+    setIsLoggedIn(false);
+  };
+  const fetchLogged = async () => {
     await fetchHandler({
       url: `${BASE_BACKEND_URL}/api/user/isLogged`,
       method: "GET",
       headers: {
         AccessControlAllowOrigin: "true",
       },
-      goodCallback: goodCallback,
-      badCallback: badCallback,
+      goodCallback: loggedGoodCallback,
+      badCallback: loggedBadCallback,
     });
+  };
+  const fetchOrganizerGoodCallback = async (response: Response) => {
+    setIsOrganizer(true);
+  };
+  const fetchOrganizerBadCallback = async (response: Response) => {
+    setIsOrganizer(false);
+  };
+  const fetchOrganizer = async () => {
+    await fetchHandler({
+      url: `${BASE_BACKEND_URL}/api/organizer/user`,
+      method: "GET",
+      headers: {
+        AccessControlAllowOrigin: "true",
+      },
+      goodCallback: fetchOrganizerGoodCallback,
+      badCallback: fetchOrganizerBadCallback,
+    });
+  };
+  const checkSession = async () => {
+    fetchLogged();
+    fetchOrganizer();
   };
 
   useEffect(() => {
     checkSession();
   }, []);
   return (
-    <AuthContext.Provider value={{ isLoggedIn, checkSession }}>
+    <AuthContext.Provider value={{ isLoggedIn, isOrganizer, checkSession }}>
       {children}
     </AuthContext.Provider>
   );

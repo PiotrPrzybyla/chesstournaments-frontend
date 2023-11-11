@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { fetchHandler } from "../utils/fetchHandler";
 import { BASE_BACKEND_URL } from "../utils/consts";
+import { useAuth } from "../context/AuthContext";
 
 interface IUserInfoReturnValue {
   username: string;
   name: string;
   surname: string;
-  isOrganizer: boolean;
   isLoading: boolean;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
   setSurname: React.Dispatch<React.SetStateAction<string>>;
-  setIsOrganizer: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const useUserInfo = (
   user_id: string | undefined
@@ -19,7 +18,6 @@ export const useUserInfo = (
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [isOrganizer, setIsOrganizer] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchUserGoodCallback = async (response: Response) => {
@@ -29,12 +27,7 @@ export const useUserInfo = (
     setUsername(data.login);
     setIsLoading(false);
   };
-  const fetchOrganizerGoodCallback = async (response: Response) => {
-    setIsOrganizer(true);
-  };
-  const fetchOrganizerBadCallback = async (response: Response) => {
-    setIsOrganizer(false);
-  };
+
   const fetchUser = () => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}/api/user`,
@@ -45,31 +38,18 @@ export const useUserInfo = (
       goodCallback: fetchUserGoodCallback,
     });
   };
-  const fetchOrganizer = () => {
-    fetchHandler({
-      url: `${BASE_BACKEND_URL}/api/organizer/user`,
-      method: "GET",
-      headers: {
-        AccessControlAllowOrigin: "true",
-      },
-      goodCallback: fetchOrganizerGoodCallback,
-      badCallback: fetchOrganizerBadCallback,
-    });
-  };
+
   useEffect(() => {
     fetchUser();
-    fetchOrganizer();
   }, []);
 
   return {
     username,
     name,
     surname,
-    isOrganizer,
     isLoading,
     setUsername,
     setName,
     setSurname,
-    setIsOrganizer,
   };
 };

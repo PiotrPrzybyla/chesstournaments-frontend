@@ -18,9 +18,8 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
   const { t } = useTranslation("myProfile");
   const { user_id } = useParams<{ user_id: string }>();
   const navigate = useNavigate();
-  const { username, name, surname, isOrganizer, isLoading } =
-    useUserInfo(user_id);
-  const { checkSession } = useAuth();
+  const { username, name, surname, isLoading } = useUserInfo(user_id);
+  const { checkSession, isOrganizer } = useAuth();
   const updateToOrganizerGoodCallback = async (response: Response) => {
     navigate(0);
   };

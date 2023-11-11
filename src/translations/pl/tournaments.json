@@ -1,4 +1,5 @@
 {
     "myTournaments": "Moje Turnieje",
-    "otherTournaments" : "Turnieje"
+    "otherTournaments" : "Turnieje",
+    "notLoggedIn": "Zaloguj się aby zobaczyć swoje turnieje"
 }

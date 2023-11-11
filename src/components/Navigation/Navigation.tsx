@@ -9,7 +9,7 @@ interface INavigationProps {}
 
 const Navigation: React.FC<INavigationProps> = () => {
   const { t } = useTranslation("navigation");
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isOrganizer } = useAuth();
   return (
     <NavAppBar position="static">
       <Container maxWidth="xl">
@@ -27,6 +27,7 @@ const Navigation: React.FC<INavigationProps> = () => {
                 <NavElement
                   name={t("createTournament")}
                   link={"/createTournament"}
+                  disabled={!isLoggedIn || !isOrganizer}
                 />
                 <NavElement
                   name={t("groups")}
@@ -39,7 +40,11 @@ const Navigation: React.FC<INavigationProps> = () => {
               <Grid container direction={"row"} alignItems={"center"}>
                 {isLoggedIn ? (
                   <>
-                    <NavElement name={t("organizer")} link={`/organizer`} />
+                    <NavElement
+                      name={t("organizer")}
+                      link={`/organizer`}
+                      disabled={!isLoggedIn || !isOrganizer}
+                    />
                     <NavElement name={t("profile")} link={`/profile`} />
                   </>
                 ) : (
