@@ -28,7 +28,9 @@ export async function fetchHandler({
       if (badCallback) {
         badCallback(response);
       } else {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        if (response.status !== 403) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
       }
     } else {
       if (goodCallback) {

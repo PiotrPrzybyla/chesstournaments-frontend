@@ -8,6 +8,7 @@ import { auth } from "../../configs/firebase";
 import { fetchHandler } from "../../utils/fetchHandler";
 import { BASE_BACKEND_URL } from "../../utils/consts";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 interface ILoginPanelProps {}
 
@@ -15,6 +16,7 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
   const { t } = useTranslation("loginRegister");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { checkSession } = useAuth();
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
@@ -24,6 +26,7 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
         password
       );
       const goodCallback = async (response: Response) => {
+        checkSession();
         navigate("/");
       };
       const token = await userCredential.user.getIdToken();

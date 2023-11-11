@@ -43,7 +43,7 @@ const App: React.FC<IAppProps> = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route
-              path="/profile/:user_id"
+              path="/profile"
               element={
                 <ProtectedRoute>
                   <ProfilePage />
@@ -51,7 +51,7 @@ const App: React.FC<IAppProps> = () => {
               }
             />
             <Route
-              path="/organizer/:organizer_id"
+              path="/organizer"
               element={
                 <ProtectedRoute>
                   <OrganizerPage />

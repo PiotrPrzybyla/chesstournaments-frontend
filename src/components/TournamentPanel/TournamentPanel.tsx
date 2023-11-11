@@ -4,7 +4,6 @@ import { Typography } from "@mui/material";
 import JoinLeaveGenerator from "../Generators/JoinLeaveGenerator";
 import { joinTournament } from "./utils";
 import LoadingCircle from "../LoadingCIrcle/LoadingCircle";
-import { getUserId } from "../../utils/getUserId";
 
 interface ITournamentPanelProps {
   tournament_id: string | undefined;
@@ -15,7 +14,6 @@ const TournamentPanel: React.FC<ITournamentPanelProps> = ({
 }) => {
   const { title, description, date, time, location, isLoading, isParticipant } =
     useTournamentInfo(tournament_id);
-  const user_id = getUserId();
   return isLoading ? (
     <LoadingCircle />
   ) : (
@@ -23,7 +21,7 @@ const TournamentPanel: React.FC<ITournamentPanelProps> = ({
       title={title}
       description={description}
       isMember={isParticipant}
-      join={() => joinTournament(tournament_id, user_id)}
+      join={() => joinTournament(tournament_id)}
     >
       <Typography>
         {date} {time}

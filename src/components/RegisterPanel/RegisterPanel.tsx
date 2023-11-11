@@ -41,7 +41,7 @@ const RegisterPanel: React.FC<IRegisterPanelProps> = () => {
       );
       const idToken = await userCredential.user.getIdToken();
       const goodCallback = async (response: Response) => {
-        navigate("/");
+        navigate("/login");
       };
       fetchHandler({
         url: `${BASE_BACKEND_URL}/api/user/register`,

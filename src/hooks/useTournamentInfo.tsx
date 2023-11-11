@@ -46,7 +46,7 @@ const useTournamentInfo = (
   };
   const fetchIsMember = () => {
     fetchHandler({
-      url: `${BASE_BACKEND_URL}/api/tournament/isMember/${tournament_id}/${getUserId()}`,
+      url: `${BASE_BACKEND_URL}/api/tournament/isMember/${tournament_id}`,
       method: "GET",
       goodCallback: fetchIsMemberGoodCallback,
     });

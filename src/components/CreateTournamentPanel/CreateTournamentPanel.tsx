@@ -8,9 +8,7 @@ import {
 } from "../../styles/Form";
 import { formatDate } from "../../utils/formatDate";
 import { fetchHandler } from "../../utils/fetchHandler";
-import { getOrganizerId } from "../../utils/getOrganizerId";
 import { BASE_BACKEND_URL } from "../../utils/consts";
-import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 interface ICreateTournamentPanelProps {}
@@ -60,7 +58,6 @@ const CreateTournamentPanel: React.FC<ICreateTournamentPanelProps> = () => {
         date: `${date} ${time}`,
         description: description,
         participantsAmount: participants,
-        organizerId: getOrganizerId(),
       },
       headers: {
         "Content-Type": "application/json",

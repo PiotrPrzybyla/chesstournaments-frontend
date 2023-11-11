@@ -32,11 +32,17 @@ export const useTournaments = (path: string): ITournamentsListProps => {
     );
     setIsLoading(false);
   };
+  const badCallback = async (response: Response) => {
+    if (response.status === 401) {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
     fetchHandler({
       url: `${BASE_BACKEND_URL}${path}`,
       method: "GET",
       goodCallback: goodCallback,
+      badCallback: badCallback,
     });
   }, []);
   return {

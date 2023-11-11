@@ -10,6 +10,7 @@ import LoadingCircle from "../LoadingCIrcle/LoadingCircle";
 import { fetchHandler } from "../../utils/fetchHandler";
 import { useNavigate } from "react-router-dom";
 import { BASE_BACKEND_URL } from "../../utils/consts";
+import { useAuth } from "../../context/AuthContext";
 
 interface IMyProfilePanelProps {}
 
@@ -19,15 +20,17 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
   const navigate = useNavigate();
   const { username, name, surname, isOrganizer, isLoading } =
     useUserInfo(user_id);
+  const { checkSession } = useAuth();
   const updateToOrganizerGoodCallback = async (response: Response) => {
-    navigate(`#`);
+    navigate(0);
   };
   const handleLogoutGoodCallback = async (response: Response) => {
+    checkSession();
     navigate(`/`);
   };
   const updateToOrganizer = () => {
     fetchHandler({
-      url: `${BASE_BACKEND_URL}/api/organizer/user/${user_id}`,
+      url: `${BASE_BACKEND_URL}/api/organizer/user`,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,13 +59,13 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
         <FormTextField defaultValue={username} label={`${t("username")}`} />
         <FormTextField defaultValue={name} label={`${t("name")}`} />
         <FormTextField defaultValue={surname} label={`${t("surname")}`} />
-        <Button>{`${t("saveBtn")}`}</Button>
+        {/* <Button>{`${t("saveBtn")}`}</Button> */}
         {isOrganizer || (
           <Button variant="contained" color="error" onClick={updateToOrganizer}>
             {`${t("updateBtn")}`}
           </Button>
         )}
-        <Button onClick={handleLogout}>Logout</Button>
+        <Button color="error" onClick={handleLogout}>{`${t("logout")}`}</Button>
       </CenterShortFormControl>
     </Container>
   );

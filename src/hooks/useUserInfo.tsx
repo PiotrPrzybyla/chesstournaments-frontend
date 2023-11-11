@@ -30,15 +30,14 @@ export const useUserInfo = (
     setIsLoading(false);
   };
   const fetchOrganizerGoodCallback = async (response: Response) => {
-    const data = await response.json();
-    setIsOrganizer(data);
+    setIsOrganizer(true);
   };
-  const fetchOrganizerBadCallback = async (error: any) => {
+  const fetchOrganizerBadCallback = async (response: Response) => {
     setIsOrganizer(false);
   };
   const fetchUser = () => {
     fetchHandler({
-      url: `${BASE_BACKEND_URL}/api/user/${user_id}`,
+      url: `${BASE_BACKEND_URL}/api/user`,
       method: "GET",
       headers: {
         AccessControlAllowOrigin: "true",
@@ -48,7 +47,7 @@ export const useUserInfo = (
   };
   const fetchOrganizer = () => {
     fetchHandler({
-      url: `${BASE_BACKEND_URL}/api/organizer/user/${user_id}`,
+      url: `${BASE_BACKEND_URL}/api/organizer/user`,
       method: "GET",
       headers: {
         AccessControlAllowOrigin: "true",

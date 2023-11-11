@@ -5,16 +5,12 @@ import TournamentsList from "./TournamentsList";
 import { ListTitle } from "../../styles/Title";
 import { useTournaments } from "../../hooks/useTournaments";
 import LoadingCircle from "../LoadingCIrcle/LoadingCircle";
-import { getUserId } from "../../utils/getUserId";
 
 interface IOtherTournamentsProps {}
 
 const OtherTournaments: React.FC<IOtherTournamentsProps> = () => {
   const { t } = useTranslation("tournaments");
-  const userId = getUserId();
-  const { tournaments, isLoading } = useTournaments(
-    `/api/tournament/all/${userId}`
-  );
+  const { tournaments, isLoading } = useTournaments(`/api/tournament/all`);
   return isLoading ? (
     <LoadingCircle />
   ) : (

@@ -1,20 +1,14 @@
 import React from "react";
 import { Container, Grid, Toolbar } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { INavElement } from "./types";
 import { LogoTypography, NavAppBar } from "./styles";
 import NavElement from "./NavElement";
-import { getUserId } from "../../utils/getUserId";
-import { getOrganizerId } from "../../utils/getOrganizerId";
 import { useAuth } from "../../context/AuthContext";
 
 interface INavigationProps {}
 
 const Navigation: React.FC<INavigationProps> = () => {
   const { t } = useTranslation("navigation");
-  const pages: INavElement[] = t("pages", { returnObjects: true });
-  const user_id = getUserId();
-  const organizerId = getOrganizerId();
   const { isLoggedIn } = useAuth();
   return (
     <NavAppBar position="static">
@@ -29,23 +23,24 @@ const Navigation: React.FC<INavigationProps> = () => {
             <Grid item>
               <Grid container direction={"row"} alignItems={"center"}>
                 <LogoTypography>ChessTournaments</LogoTypography>
-                {pages.map(({ name, link }: INavElement, index) => (
-                  <NavElement name={name} link={link} key={index} />
-                ))}
+                <NavElement name={t("tournaments")} link={"/tournaments"} />
+                <NavElement
+                  name={t("createTournament")}
+                  link={"/createTournament"}
+                />
+                <NavElement
+                  name={t("groups")}
+                  link={"/groups"}
+                  disabled={true}
+                />
               </Grid>
             </Grid>
             <Grid item>
               <Grid container direction={"row"} alignItems={"center"}>
                 {isLoggedIn ? (
                   <>
-                    <NavElement
-                      name={t("organizer")}
-                      link={`/organizer/${organizerId}`}
-                    />
-                    <NavElement
-                      name={t("profile")}
-                      link={`/profile/${user_id}`}
-                    />
+                    <NavElement name={t("organizer")} link={`/organizer`} />
+                    <NavElement name={t("profile")} link={`/profile`} />
                   </>
                 ) : (
                   <NavElement name={t("login")} link={"/login"} />

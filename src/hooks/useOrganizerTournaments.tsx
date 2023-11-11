@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchHandler } from "../utils/fetchHandler";
 import { BASE_BACKEND_URL } from "../utils/consts";
-import { getOrganizerId } from "../utils/getOrganizerId";
 
 interface IOrganizerTournament {
   tournament_id: string;
@@ -19,7 +18,6 @@ export const useOrganizerTournaments = (
 ): ITournamentsListProps => {
   const [tournaments, setTournaments] = useState<IOrganizerTournament[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const organizerId = getOrganizerId();
   const goodCallback = async (response: Response) => {
     const data = await response.json();
     setTournaments(
@@ -37,7 +35,7 @@ export const useOrganizerTournaments = (
   };
   useEffect(() => {
     fetchHandler({
-      url: `${BASE_BACKEND_URL}/api/tournament/organizer/${status}/${organizerId}`,
+      url: `${BASE_BACKEND_URL}/api/tournament/organizer/${status}`,
       method: "GET",
       goodCallback: goodCallback,
     });
