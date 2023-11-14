@@ -1,10 +1,9 @@
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import { MainTitle } from "../../styles/Title";
 import { Button } from "@mui/material";
 import { CenterShortFormControl, FormTextField } from "../../styles/Form";
 import { useUserInfo } from "../../hooks/useUserInfo";
-import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import LoadingCircle from "../LoadingCIrcle/LoadingCircle";
 import { fetchHandler } from "../../utils/fetchHandler";
@@ -16,9 +15,36 @@ interface IMyProfilePanelProps {}
 
 const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
   const { t } = useTranslation("myProfile");
-  const { user_id } = useParams<{ user_id: string }>();
   const navigate = useNavigate();
-  const { username, name, surname, isLoading } = useUserInfo(user_id);
+  const { username, name, surname, isLoading } = useUserInfo("");
+  const [updatedName, setUpdatedName] = React.useState<string>("");
+  const [updatedSurname, setUpdatedSurname] = React.useState<string>("");
+  const [updatedUsername, setUpdatedUsername] =
+    React.useState<string>(username);
+  useEffect(() => {
+    setUpdatedName(name);
+    setUpdatedSurname(surname);
+    setUpdatedUsername(username);
+  }, [username, name, surname]);
+  const updateUserGoodCallback = async (response: Response) => {
+    navigate(0);
+  };
+  const saveUpdatedUser = () => {
+    fetchHandler({
+      url: `${BASE_BACKEND_URL}/api/user`,
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: {
+        username: updatedUsername,
+        name: updatedName,
+        surname: updatedSurname,
+      },
+      goodCallback: updateUserGoodCallback,
+    });
+  };
   const { checkSession, isOrganizer } = useAuth();
   const updateToOrganizerGoodCallback = async (response: Response) => {
     navigate(0);
@@ -55,10 +81,22 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
     <Container maxWidth="xs">
       <CenterShortFormControl>
         <MainTitle>My Profile</MainTitle>
-        <FormTextField defaultValue={username} label={`${t("username")}`} />
-        <FormTextField defaultValue={name} label={`${t("name")}`} />
-        <FormTextField defaultValue={surname} label={`${t("surname")}`} />
-        {/* <Button>{`${t("saveBtn")}`}</Button> */}
+        <FormTextField
+          defaultValue={username}
+          label={`${t("username")}`}
+          onChange={(e) => setUpdatedUsername(e.target.value)}
+        />
+        <FormTextField
+          defaultValue={name}
+          label={`${t("name")}`}
+          onChange={(e) => setUpdatedName(e.target.value)}
+        />
+        <FormTextField
+          defaultValue={surname}
+          label={`${t("surname")}`}
+          onChange={(e) => setUpdatedSurname(e.target.value)}
+        />
+        <Button onClick={saveUpdatedUser}>{`${t("saveBtn")}`}</Button>
         {isOrganizer || (
           <Button variant="contained" color="error" onClick={updateToOrganizer}>
             {`${t("updateBtn")}`}

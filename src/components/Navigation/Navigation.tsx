@@ -32,7 +32,7 @@ const Navigation: React.FC<INavigationProps> = () => {
                 <NavElement
                   name={t("groups")}
                   link={"/groups"}
-                  disabled={true}
+                  disabled={!isLoggedIn}
                 />
               </Grid>
             </Grid>

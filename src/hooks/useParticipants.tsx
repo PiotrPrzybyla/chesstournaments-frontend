@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchHandler } from "../utils/fetchHandler";
+import { BASE_BACKEND_URL } from "../utils/consts";
 
 interface IParticipant {
   user_id: string;
@@ -24,15 +25,14 @@ export const useParticipants = (
       }))
     );
   };
+  const fetchData = () => {
+    fetchHandler({
+      url: `${BASE_BACKEND_URL}/api/tournament/users/${tournament_id}`,
+      method: "GET",
+      goodCallback: goodCallback,
+    });
+  };
   useEffect(() => {
-    const fetchData = () => {
-      fetchHandler({
-        url: `http://localhost:8080/api/tournament/users/${tournament_id}`,
-        method: "GET",
-        goodCallback: goodCallback,
-      });
-    };
-
     fetchData();
   }, [tournament_id]);
   return {

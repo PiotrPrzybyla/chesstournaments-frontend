@@ -2,7 +2,7 @@ import React from "react";
 import { IOrganizerTournament } from "./types";
 import { Grid, Link } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { TournamentCard } from "./styles";
+import { WideCard } from "../../styles/Card";
 
 interface IOrganizerTournamentElementProps {
   tournament: IOrganizerTournament;
@@ -15,7 +15,7 @@ const OrganizerTournamentElement: React.FC<
     tournament;
   const { t } = useTranslation("organizerPanel");
   return (
-    <TournamentCard variant="outlined">
+    <WideCard variant="outlined">
       <Link
         href={`/tournament/${tournament_id}`}
         color="inherit"
@@ -38,7 +38,7 @@ const OrganizerTournamentElement: React.FC<
           </Grid>
         </Grid>
       </Link>
-    </TournamentCard>
+    </WideCard>
   );
 };
 

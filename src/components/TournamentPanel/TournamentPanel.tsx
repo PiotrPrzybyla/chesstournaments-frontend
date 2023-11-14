@@ -2,7 +2,7 @@ import React from "react";
 import useTournamentInfo from "../../hooks/useTournamentInfo";
 import { Typography } from "@mui/material";
 import JoinLeaveGenerator from "../Generators/JoinLeaveGenerator";
-import { joinTournament } from "./utils";
+import { joinTournament, leaveTournament } from "./utils";
 import LoadingCircle from "../LoadingCIrcle/LoadingCircle";
 
 interface ITournamentPanelProps {
@@ -22,6 +22,7 @@ const TournamentPanel: React.FC<ITournamentPanelProps> = ({
       description={description}
       isMember={isParticipant}
       join={() => joinTournament(tournament_id)}
+      leave={() => leaveTournament(tournament_id)}
     >
       <Typography>
         {date} {time}
