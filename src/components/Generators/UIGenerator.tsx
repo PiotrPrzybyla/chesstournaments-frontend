@@ -1,17 +1,20 @@
-import React, { ReactNode } from 'react'
-import Navigation from '../Navigation/Navigation'
+import React, { ReactNode, useState } from "react";
+import Navigation from "../Navigation/Navigation";
+import useSocket from "../../hooks/useSocket";
+import Chatbot from "../ChatBot/Chatbot";
 
 interface IUIGeneratorProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-const UIGenerator:React.FC<IUIGeneratorProps> = ({children}) => {
+const UIGenerator: React.FC<IUIGeneratorProps> = ({ children }) => {
   return (
     <div>
-        <Navigation/>
-        {children}    
+      <Navigation />
+      {children}
+      <Chatbot />
     </div>
-  )
-}
+  );
+};
 
-export default UIGenerator
+export default UIGenerator;
