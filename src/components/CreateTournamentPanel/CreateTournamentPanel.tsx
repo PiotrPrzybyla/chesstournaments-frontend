@@ -15,13 +15,13 @@ interface ICreateTournamentPanelProps {}
 
 const CreateTournamentPanel: React.FC<ICreateTournamentPanelProps> = () => {
   const { t } = useTranslation("createTournament");
+  const navigate = useNavigate();
   const [name, setName] = React.useState("");
   const [city, setCity] = React.useState("");
   const [date, setDate] = React.useState("");
   const [time, setTime] = React.useState("");
   const [participants, setParticipants] = React.useState(0);
   const [description, setDescription] = React.useState("");
-  const navigate = useNavigate();
   const handleNameInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };

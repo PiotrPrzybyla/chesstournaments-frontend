@@ -6,17 +6,19 @@ interface IGroup {
   group_id: number;
   name: string;
   description: string;
+  rating?: number;
 }
 export const useGroups = (type: string) => {
   const [groups, setGroups] = useState<IGroup[]>([]);
   const goodCallback = async (response: Response) => {
     const data = await response.json();
-
+    console.log(data);
     setGroups(
       data.map((group: any) => ({
         group_id: group.groupId,
         name: group.name,
         description: group.description,
+        rating: group.rating,
       }))
     );
   };

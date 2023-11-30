@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginRegisterGenerator from "../Generators/LoginRegisterGenerator";
 import { FormTextField } from "../../styles/Form";
 import { useTranslation } from "react-i18next";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../configs/firebase";
 import { red } from "@mui/material/colors";
@@ -20,6 +20,7 @@ const RegisterPanel: React.FC<IRegisterPanelProps> = () => {
   const [surname, setSurname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -53,6 +54,7 @@ const RegisterPanel: React.FC<IRegisterPanelProps> = () => {
           password: password,
           idToken: idToken,
           categoryId: 4,
+          age: parseInt(age),
         },
         headers: {
           "Content-Type": "application/json",
@@ -96,6 +98,12 @@ const RegisterPanel: React.FC<IRegisterPanelProps> = () => {
         variant="outlined"
         label={`${t("mail")}`}
         onChange={(e) => setEmail(e.target.value)}
+      />
+      <FormTextField
+        type="number"
+        variant="outlined"
+        label={`${t("age")}`}
+        onChange={(e) => setAge(e.target.value)}
       />
       <FormTextField
         type="password"
