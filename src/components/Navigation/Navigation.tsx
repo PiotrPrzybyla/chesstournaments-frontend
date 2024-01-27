@@ -29,11 +29,11 @@ const Navigation: React.FC<INavigationProps> = () => {
                   link={"/createTournament"}
                   disabled={!isLoggedIn || !isOrganizer}
                 />
-                <NavElement
+                {/* <NavElement
                   name={t("groups")}
                   link={"/groups"}
                   disabled={!isLoggedIn}
-                />
+                /> */}
               </Grid>
             </Grid>
             <Grid item>

@@ -63,22 +63,22 @@ const App: React.FC<IAppProps> = () => {
                 </ProtectedRoute>
               }
             />
-            <Route
+            {/* <Route
               path="/groups"
               element={
                 <ProtectedRoute>
                   <GroupsPage />
                 </ProtectedRoute>
               }
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/group/:group_id"
               element={
                 <ProtectedRoute>
                   <GroupPage />
                 </ProtectedRoute>
               }
-            />
+            /> */}
           </Routes>
         </BrowserRouter>
       </AuthProvider>
