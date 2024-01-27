@@ -34,10 +34,10 @@ const Navigation: React.FC<INavigationProps> = () => {
             <ListItem>
               <LogoTypography>ChessTournaments</LogoTypography>
             </ListItem>
-            <ListItem button onClick={handleDrawerToggle}>
+            <ListItem onClick={handleDrawerToggle}>
               <NavElement name={t("tournaments")} link={"/tournaments"} />
             </ListItem>
-            <ListItem button onClick={handleDrawerToggle}>
+            <ListItem onClick={handleDrawerToggle}>
               <NavElement
                 name={t("createTournament")}
                 link={"/createTournament"}
@@ -53,20 +53,20 @@ const Navigation: React.FC<INavigationProps> = () => {
             </ListItem> */}
             {isLoggedIn ? (
               <>
-                <ListItem button onClick={handleDrawerToggle}>
+                <ListItem onClick={handleDrawerToggle}>
                   <NavElement
                     name={t("organizer")}
                     link={`/organizer`}
                     disabled={!isLoggedIn || !isOrganizer}
                   />
                 </ListItem>
-                <ListItem button onClick={handleDrawerToggle}>
+                <ListItem onClick={handleDrawerToggle}>
                   {" "}
                   <NavElement name={t("profile")} link={`/profile`} />
                 </ListItem>
               </>
             ) : (
-              <ListItem button onClick={handleDrawerToggle}>
+              <ListItem onClick={handleDrawerToggle}>
                 {" "}
                 <NavElement name={t("login")} link={"/login"} />
               </ListItem>

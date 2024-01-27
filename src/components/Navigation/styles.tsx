@@ -1,7 +1,14 @@
 import { styled } from "@mui/system";
-import { AppBar, Link, Typography } from "@mui/material";
-export const NavLink = styled(Link)({
+import { AppBar, Link, ListItem, Typography } from "@mui/material";
+export const NavLink = styled("div")(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "#fff" : "#000",
   textDecoration: "none",
+  width: "100%",
+  padding: "10px",
+}));
+
+export const NavListItem = styled(ListItem)({
+  padding: "0",
 });
 export const DisabledNavLink = styled(Link)({
   textDecoration: "none",
