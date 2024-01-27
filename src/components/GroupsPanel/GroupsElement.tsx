@@ -1,6 +1,7 @@
-import { Card, Grid, Link } from "@mui/material";
+import { Grid, Link } from "@mui/material";
 import React from "react";
 import { IGroup } from "./types";
+import { WideCard } from "../../styles/Card";
 
 interface IGroupsElementProps {
   group: IGroup;
@@ -9,7 +10,7 @@ interface IGroupsElementProps {
 const GroupsElement: React.FC<IGroupsElementProps> = ({ group }) => {
   const { group_id, name, description } = group;
   return (
-    <Card variant="outlined">
+    <WideCard variant="outlined">
       <Link href={`/group/${group_id}`} color="inherit" underline="none">
         <Grid
           container
@@ -25,7 +26,7 @@ const GroupsElement: React.FC<IGroupsElementProps> = ({ group }) => {
           </Grid>
         </Grid>
       </Link>
-    </Card>
+    </WideCard>
   );
 };
 

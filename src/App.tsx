@@ -12,28 +12,76 @@ import RegisterPage from "./Pages/RegisterPage";
 import i18next from "i18next";
 import { I18nextProvider } from "react-i18next";
 import "./configs/i18n";
+import ProtectedRoute from "./Routes/PotectedRoute";
+import { AuthProvider } from "./context/AuthContext";
+import OrganizerRoute from "./Routes/OrganizerRoute";
 interface IAppProps {}
 
 const App: React.FC<IAppProps> = () => {
   return (
     <I18nextProvider i18n={i18next}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<TournamentsPage />} />
-          <Route path="/tournaments" element={<TournamentsPage />} />
-          <Route
-            path="/tournament/:tournament_id"
-            element={<TournamentPage />}
-          />
-          <Route path="/createTournament" element={<CreateTournamentPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/profile/:user_id" element={<ProfilePage />} />
-          <Route path="/organizer/:organizer_id" element={<OrganizerPage />} />
-          <Route path="/groups" element={<GroupsPage />} />
-          <Route path="/group/:group_id" element={<GroupPage />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<TournamentsPage />} />
+            <Route path="/tournaments" element={<TournamentsPage />} />
+            <Route
+              path="/tournament/:tournament_id"
+              element={
+                <ProtectedRoute>
+                  <TournamentPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/createTournament"
+              element={
+                <ProtectedRoute>
+                  <OrganizerRoute>
+                    <CreateTournamentPage />
+                  </OrganizerRoute>
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/organizer"
+              element={
+                <ProtectedRoute>
+                  <OrganizerRoute>
+                    <OrganizerPage />
+                  </OrganizerRoute>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/groups"
+              element={
+                <ProtectedRoute>
+                  <GroupsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/group/:group_id"
+              element={
+                <ProtectedRoute>
+                  <GroupPage />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </I18nextProvider>
   );
 };

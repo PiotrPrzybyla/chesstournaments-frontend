@@ -1,22 +1,68 @@
+import { useEffect, useState } from "react";
+import { fetchHandler } from "../utils/fetchHandler";
+import { BASE_BACKEND_URL } from "../utils/consts";
+import { formatDate } from "../utils/formatDate";
+import { getUserId } from "../utils/getUserId";
+
 interface IuseTournamentInfoReturnValue {
-  tournament_id: number;
   title: string;
   location: string;
   date: string;
   time: string;
   description: string;
+  isLoading: boolean;
+  isParticipant: boolean;
 }
 const useTournamentInfo = (
   tournament_id: string | undefined
 ): IuseTournamentInfoReturnValue => {
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [description, setDescription] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isParticipant, setIsParticipant] = useState(false);
+
+  const fetchTournamentGoodCallback = async (response: Response) => {
+    const data = await response.json();
+    setTitle(data.name);
+    setLocation(data.address);
+    setDate(formatDate(data.date.slice(0, 10)));
+    setTime(data.date.slice(11, 16));
+    setDescription(data.description);
+  };
+  const fetchIsMemberGoodCallback = async (response: Response) => {
+    const data = await response.json();
+    setIsParticipant(data.isMember);
+    setIsLoading(false);
+  };
+  const fetchTournament = () => {
+    fetchHandler({
+      url: `${BASE_BACKEND_URL}/api/tournament/${tournament_id}`,
+      method: "GET",
+      goodCallback: fetchTournamentGoodCallback,
+    });
+  };
+  const fetchIsMember = () => {
+    fetchHandler({
+      url: `${BASE_BACKEND_URL}/api/tournament/isMember/${tournament_id}`,
+      method: "GET",
+      goodCallback: fetchIsMemberGoodCallback,
+    });
+  };
+  useEffect(() => {
+    fetchTournament();
+    fetchIsMember();
+  }, []);
   return {
-    tournament_id: 1,
-    title: "Event title",
-    location: "Wrocław",
-    date: "23.11.2023",
-    time: "12:00",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, eget ultricies nisl nisl sit amet nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, eget ultricies nisl nisl sit amet nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, eget ultricies nisl nisl sit amet nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, eget ultricies nisl nisl sit amet nunc.",
+    title,
+    location,
+    date,
+    time,
+    description,
+    isLoading,
+    isParticipant,
   };
 };
 

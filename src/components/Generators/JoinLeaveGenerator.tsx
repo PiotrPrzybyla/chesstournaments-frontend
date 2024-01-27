@@ -8,25 +8,49 @@ interface IJoinLeaveGeneratorProps {
   title: string;
   description: string;
   isMember: boolean;
+  join?: () => void;
+  leave?: () => void;
   children?: React.ReactNode;
 }
 
+interface IButtonProps {
+  onClick?: () => void;
+}
+const JoinButton: React.FC<IButtonProps> = ({ onClick }) => {
+  const { t } = useTranslation("joinLeave");
+  return (
+    <Button color={"success"} variant="contained" onClick={onClick}>
+      {`${t("join")}`}
+    </Button>
+  );
+};
+const LeaveButton: React.FC<IButtonProps> = ({ onClick }) => {
+  const { t } = useTranslation("joinLeave");
+  return (
+    <Button color={"error"} variant="contained" onClick={onClick}>
+      {`${t("leave")}`}
+    </Button>
+  );
+};
 const JoinLeaveGenerator: React.FC<IJoinLeaveGeneratorProps> = ({
   title,
   description,
   isMember,
   children,
+  join,
+  leave,
 }) => {
-  const { t } = useTranslation("joinLeave");
   return (
     <Container maxWidth="md">
       <Box textAlign="center" margin="60px">
         <MainTitle>{title}</MainTitle>
         {children}
         <Description>{description}</Description>
-        <Button color={isMember ? "error" : "success"} variant="contained">
-          {isMember ? `${t("leave")}` : `${t("join")}`}
-        </Button>
+        {isMember ? (
+          <LeaveButton onClick={leave} />
+        ) : (
+          <JoinButton onClick={join} />
+        )}
       </Box>
     </Container>
   );

@@ -1,4 +1,5 @@
 {
     "myTournaments": "My Tournaments",
-    "otherTournaments" : "Tournaments"
+    "otherTournaments" : "Tournaments",
+    "notLoggedIn": "Login to see your tournaments"
 }
