@@ -9,6 +9,8 @@ import { fetchHandler } from "../../utils/fetchHandler";
 import { BASE_BACKEND_URL } from "../../utils/consts";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { ErrorMessage } from "../../styles/Text";
+import red from "@mui/material/colors/red";
 
 interface ILoginPanelProps {}
 
@@ -16,8 +18,14 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
   const { t } = useTranslation("loginRegister");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { checkSession } = useAuth();
   const navigate = useNavigate();
+  const goodCallback = async () => {
+    checkSession();
+    setError("");
+    navigate("/");
+  };
   const handleLogin = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -25,10 +33,6 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
         email,
         password
       );
-      const goodCallback = async (response: Response) => {
-        checkSession();
-        navigate("/");
-      };
       const token = await userCredential.user.getIdToken();
       fetchHandler({
         url: `${BASE_BACKEND_URL}/api/user/login`,
@@ -36,9 +40,10 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        goodCallback: goodCallback,
+        goodCallback,
       });
     } catch (error) {
+      setError(`${t("loginError")}`);
       console.error(error);
     }
   };
@@ -60,6 +65,7 @@ const LoginPanel: React.FC<ILoginPanelProps> = () => {
         label={`${t("password")}`}
         onChange={(e) => setPassword(e.target.value)}
       />
+      {error !== "" && <ErrorMessage color={red}>{error}</ErrorMessage>}
       <Button variant="contained" onClick={handleLogin}>{`${t(
         "login"
       )}`}</Button>

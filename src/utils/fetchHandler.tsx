@@ -24,6 +24,7 @@ export async function fetchHandler({
       body: JSON.stringify(body),
       credentials: "include",
     });
+    console.log(response);
     if (!response.ok) {
       if (badCallback) {
         badCallback(response);
