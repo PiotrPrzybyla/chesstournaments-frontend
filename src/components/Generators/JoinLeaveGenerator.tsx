@@ -42,7 +42,7 @@ const JoinLeaveGenerator: React.FC<IJoinLeaveGeneratorProps> = ({
 }) => {
   return (
     <Container maxWidth="md">
-      <Box textAlign="center" margin="60px">
+      <Box textAlign="center" margin="3.17rem">
         <MainTitle>{title}</MainTitle>
         {children}
         <Description>{description}</Description>

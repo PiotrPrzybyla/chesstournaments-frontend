@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchHandler } from "../utils/fetchHandler";
+import { BASE_BACKEND_URL } from "../utils/consts";
 export const useIsOrganizerOfTournament = (
   tournament_id: string | undefined
 ): boolean => {
@@ -10,7 +11,7 @@ export const useIsOrganizerOfTournament = (
   };
   useEffect(() => {
     fetchHandler({
-      url: `http://localhost:8080/api/tournament/isOrganizer/${tournament_id}`,
+      url: `${BASE_BACKEND_URL}/api/tournament/isOrganizer/${tournament_id}`,
       method: "GET",
       goodCallback: goodCallback,
     });

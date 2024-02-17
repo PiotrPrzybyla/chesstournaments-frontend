@@ -3,11 +3,11 @@ import { styled } from "@mui/system";
 import { MainTitle } from "./Title";
 
 export const FormTextField = styled(TextField)({
-  margin: "10px",
+  margin: "0.625rem",
 });
 
 export const FormTitle = styled(MainTitle)({
-  margin: "30px",
+  margin: "1.875rem",
   textAlign: "center",
 });
 
@@ -20,5 +20,5 @@ export const CenterShortFormControl = styled(FormControl)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  gap: "10px",
+  gap: "0.625rem",
 });

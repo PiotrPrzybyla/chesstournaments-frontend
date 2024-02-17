@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import {
   AppBar,
-  Container,
   Drawer,
-  Grid,
   IconButton,
   List,
   ListItem,
   Toolbar,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { LogoTypography, NavAppBar } from "./styles";
+import { LogoTypography } from "./styles";
 import NavElement from "./NavElement";
 import { useAuth } from "../../context/AuthContext";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useMediaQuery } from "@mui/material";
 
 interface INavigationProps {}
 
@@ -24,6 +23,8 @@ const Navigation: React.FC<INavigationProps> = () => {
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
+  const isMobile = useMediaQuery("(max-width:1024px)");
+
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -31,7 +32,11 @@ const Navigation: React.FC<INavigationProps> = () => {
           <MenuIcon />
         </IconButton>
 
-        <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
+        <Drawer
+          anchor={isMobile ? "top" : "left"}
+          open={drawerOpen}
+          onClose={handleDrawerToggle}
+        >
           <List>
             <ListItem>
               <LogoTypography>ChessTournaments</LogoTypography>

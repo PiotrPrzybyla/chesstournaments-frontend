@@ -4,7 +4,7 @@ interface FetchHandlerProps {
   url: string;
   method: RequestMethod;
   headers?: HeadersInit;
-  body?: any;
+  body?: object;
   goodCallback: (response: Response) => void;
   badCallback?: (response: Response) => void;
 }
@@ -24,7 +24,6 @@ export async function fetchHandler({
       body: JSON.stringify(body),
       credentials: "include",
     });
-    console.log(response);
     if (!response.ok) {
       if (badCallback) {
         badCallback(response);

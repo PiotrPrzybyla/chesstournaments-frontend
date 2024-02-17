@@ -80,7 +80,7 @@ const MyProfilePanel: React.FC<IMyProfilePanelProps> = () => {
   ) : (
     <Container maxWidth="xs">
       <CenterShortFormControl>
-        <MainTitle>My Profile</MainTitle>
+        <MainTitle>{`${t("title")}`}</MainTitle>
         <FormTextField
           defaultValue={username}
           label={`${t("username")}`}

@@ -2,11 +2,11 @@ import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const TournamentInfo = styled(Typography)({
-  fontSize: "20px",
-  margin: "10px",
+  fontSize: "1.25rem",
+  margin: "0.625rem",
 });
 
 export const TournamentsAlert = styled(Typography)({
-  fontSize: "50px",
-  margin: "80px",
+  fontSize: "2.5rem",
+  margin: "5rem",
 });
